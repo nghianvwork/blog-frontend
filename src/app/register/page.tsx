@@ -10,18 +10,20 @@ import { useRouter } from "next/navigation";
 export default function RegisterPage() {
   const router = useRouter();
 
-  const [username, setUsername] = useState("");
+  const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
 
   
-  const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") + "/api/v1/auth/register" || "http://localhost:3000/api/v1/auth/register";
+  const API_URL =
+  (process.env.NEXT_PUBLIC_API_URL
+    ? process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, "")
+    : "http://localhost:4000") + "/api/v1/auth/register";
+
 
   const validateForm = () => {
-    if (!username.trim()) return "Username không được để trống";
+    if (!name.trim()) return "Username không được để trống";
     if (!email.trim()) return "Email không được để trống";
   
     const re = /\S+@\S+\.\S+/;
@@ -42,11 +44,9 @@ export default function RegisterPage() {
 
     try {
       const userPayload = {
-        username: username.trim(),
+        name: name.trim(),
         password, 
         email: email.trim(),
-        firstname: firstname.trim() || null,
-        lastname: lastname.trim() || null,
       };
 
       const response = await fetch(API_URL, {
@@ -103,11 +103,11 @@ export default function RegisterPage() {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label className="form-label">Username</label>
-                <input
+<input
                   type="text"
                   className="form-control"
                   placeholder="Nhập username"
-                  value={username}
+                  value={name}
                   onChange={(e) => setUsername(e.target.value)}
                   required
                 />
@@ -136,30 +136,6 @@ export default function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-            </div>
-
-            <div className="row">
-              <div className="col-md-6 mb-3">
-                <label className="form-label">First name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Nhập tên"
-                  value={firstname}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-              </div>
-
-              <div className="col-md-6 mb-3">
-                <label className="form-label">Last name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Nhập họ"
-                  value={lastname}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-              </div>
             </div>
 
             <div className="d-flex justify-content-between align-items-center mt-4">

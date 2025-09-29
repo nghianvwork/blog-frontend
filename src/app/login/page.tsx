@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/navigation";
@@ -11,8 +11,20 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const API_URL = "http://localhost:3000/users"; 
+  useEffect(() => {
+    const data =
+      typeof window !== "undefined" &&
+      (localStorage.getItem("user-info") || sessionStorage.getItem("user-info"));
+    if (data) {
+      try {
+        const u = JSON.parse(data as string);
+        if (u && (u.id || u.email || u.name)) {
+          router.replace("/"); 
+        }
+      } catch {}
+    }
+  }, [router]);
+  const API_URL = "http://localhost:4000/api/v1/auth/login"; 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
