@@ -1,0 +1,65 @@
+{
+  "users": [
+    {
+      "id": "ff26",
+      "username": "nghianv",
+      "password": "Nghia08@",
+      "email": "he180712nguyenvannghia@gmail.com",
+      "firstname": "Nguyen Van",
+      "lastname": "Nghia",
+      "phone": "0346492902",
+      "role": "admin"
+    },
+    {
+      "id": "9b84",
+      "username": "duongphan",
+      "password": "oppsloki@1",
+      "email": "oppslokiok@gmail.com",
+      "firstname": "Phan ",
+      "lastname": "Duong",
+      "phone": "0963289961",
+      "role": "user"
+    },
+    {
+      "id": "d717",
+      "username": "nghianv10@gmail.com",
+      "password": "Nghia08@",
+      "email": "nghiavip2004kl@gmail.com",
+      "firstname": "Nguyễn Văn",
+      "lastname": "Nghĩa"
+    },
+    {
+      "id": "0a94",
+      "email": "nghianv10@gmail.com",
+      "password": "Nghia08@"
+    },
+    {
+      "id": "5bb7",
+      "email": "nghianv10@gmail.com",
+      "password": "Nghia08@"
+    },
+    {
+      "id": "b65c",
+      "email": "nghianv10@gmail.com",
+      "password": "Nghia08@"
+    },
+    {
+      "id": "c3e0",
+      "email": "nghianv10@gmail.com",
+      "password": "Nghia08@"
+    },
+    {
+      "id": "f701",
+      "email": "nghianv10@gmail.com",
+      "password": "Nghia08@"
+    },
+    {
+      "id": "420e",
+      "username": "abc123",
+      "password": "Nghia08@",
+      "email": "nghianv0810@gmail.com",
+      "firstname": "Nguyễn Văn",
+      "lastname": "Nghĩa"
+    }
+  ]
+}
