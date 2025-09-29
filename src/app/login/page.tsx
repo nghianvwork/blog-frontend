@@ -54,18 +54,21 @@ export default function LoginPage() {
     }
 
     
-    if (json?.token) {
-     
-      document.cookie = `token=${encodeURIComponent(json.token)}; path=/; max-age=3600; Secure; SameSite=Lax`;
-    }
+  
+if (json?.token) {
+  const isLocal = typeof window !== "undefined" && window.location.hostname === "localhost";
+  const cookieOpts = isLocal ? `path=/; max-age=3600; SameSite=Lax` : `path=/; max-age=3600; Secure; SameSite=Lax`;
+  document.cookie = `token=${encodeURIComponent(json.token)}; ${cookieOpts}`;
+}
 
-   
-    if (json?.user) {
-      localStorage.setItem("user-info", JSON.stringify(json.user));
-    } else {
-      
-      localStorage.setItem("user-info", JSON.stringify(json));
-    }
+
+  if (json?.user) {
+  localStorage.setItem("user-info", JSON.stringify(json.user));
+} else {
+  localStorage.setItem("user-info", JSON.stringify(json));
+}
+
+window.dispatchEvent(new CustomEvent("user-changed", { detail: { user: json?.user ?? json } }));
 
     alert("Đăng nhập thành công!");
     router.push("/");

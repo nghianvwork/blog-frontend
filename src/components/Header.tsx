@@ -10,19 +10,33 @@ export default function Header() {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-   
-    const loadUser = () => {
-      const data =
-        localStorage.getItem("user-info") ||
-        sessionStorage.getItem("user-info");
+  const loadUser = () => {
+    const data = localStorage.getItem("user-info") || sessionStorage.getItem("user-info");
+    try {
       setUser(data ? JSON.parse(data) : null);
-    };
+    } catch (err) {
+      console.error("parse user-info failed", err);
+      setUser(null);
+    }
+  };
 
-    loadUser(); 
-    window.addEventListener("storage", loadUser); 
-    return () => window.removeEventListener("storage", loadUser);
-  }, []);
+  loadUser();
 
+  const onStorage = (e: StorageEvent) => {
+    loadUser();
+  };
+  const onUserChanged = (e: Event) => {
+    loadUser();
+  };
+
+  window.addEventListener("storage", onStorage); 
+  window.addEventListener("user-changed", onUserChanged as EventListener);
+
+  return () => {
+    window.removeEventListener("storage", onStorage);
+    window.removeEventListener("user-changed", onUserChanged as EventListener);
+  };
+}, []);
   const handleLogout = () => {
     localStorage.removeItem("user-info");
     sessionStorage.removeItem("user-info");
